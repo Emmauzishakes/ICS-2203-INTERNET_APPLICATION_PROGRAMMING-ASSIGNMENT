@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Event/index.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Countdown Timer</title>
+</head>
+<body>
+    <nav class="nav-wrapper">
+        <div class="nav-container w-[100vw] h-[3rem] bg-blue-300">
+            <div class="nav-content flex justify-between">
+                <div class="ms-[1rem] py-1 md:ms-[3rem] left">
+                    <h3 class="font-semibold text-3xl text-gray-800">Countdown Timer</h3>
+                </div>
+                <div class="nav-right hidden  md:flex md:space-x-[3rem] md:me-[5rem] md:py-2 md:text-xl">
+                    <a href="{% url 'Event:index' %}" class="hover:p-1 hover:bg-blue-500 hover:rounded">Home</a>
+                    <a href="{% url 'Event:add-event' %}" class="hover:p-1 hover:bg-blue-500 hover:rounded">New Event</a>
+                    <a href="#" class="hover:p-1 hover:bg-blue-500 hover:rounded">History</a>
+                </div>
+                <div class="nav-right pe-[2rem] md:hidden me-2 pt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer" id="nav-right-menuBtn" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="menu-wrapper hidden" id="menu-wrapper">
+        <div class="menu-container w-full">
+            <div class="menu-content flex flex-col bg-blue-200 rounded-sm border-1 border-blue-500">
+                <ul class="pt-2 pb-3 items-center flex flex-col space-y-3">
+                    <li class="border-b-1 border-blue-500 w-full text-center pb-2"><a href="{% url 'Event:index' %}">Home</a></li>
+                    <li class="border-b-1 border-blue-500 w-full text-center pb-2"><a href="{% url 'Event:add-event' %}">New Event</a></li>
+                    <li class="w-full text-center"><a href="#">History</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% block content %}{% endblock content %}
+
+    <script src="{% static 'js/base.js' %}"></script>
+</body>
+</html>

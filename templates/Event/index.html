@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+<h1>Hello world!</h1>
+
+{% block content %}
+    <div class="timer-wrapper">
+        <div class="timer-container w-[60vw] bg-gray-200 mt-4 rounded-2xl mx-auto border-1 border-gray-300 shadow-sm">
+            <div class="flex flex-col items-center h-[100%]">
+                <div class="card pb-4 mb-4">
+                    <h3 class="text-2xl font-semibold ">Countdown Events</h3>
+                    {% for event in events %}
+                    <div class="bg-gray-300 p-2 mt-4 rounded-sm">
+                        <p><b>Name: </b>{{event.name}}</p>
+                        <p><b>Description: </b>{{event.description}}</p>
+                        <p><b>Date: </b>{{event.event_date}}</p>
+                        <p id="countdown-{{ event.id }}" class="text-center"><b>Countdown: </b></p>
+
+                        <script src="{% static 'js/countdown.js' %}"></script>
+
+                        <input type="hidden" class="countdown-data" 
+                        data-id="countdown-{{ event.id }}" 
+                        data-date="{{ event.event_date|date:'Y-m-d\\TH:i:s' }}">
+                        {% comment %} <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                startCountdown("countdown-{{ event.id }}", "{{ event.event_date|date:'Y-m-d\\TH:i:s' }}");
+                            });
+                        </script> {% endcomment %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% comment %} <div class="button flex space-x-[3rem]">
+                    <div class="button-left bottom-2 rounded py-2 px-3 bg-blue-500 mt-50 cursor-pointer hover:scale-[0.7] transition-all duration-300">Start</div>
+                    <div class="button-right bottom-2 rounded py-2 px-3 bg-orange-500 mt-50 cursor-pointer hover:scale-[0.7] transition-all duration-300">Stop</div>
+                </div> {% endcomment %}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% comment %} 
+    <!-- index.html -->  
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ event.name }}</h5>
+        <div class="progress">
+            <div class="progress-bar" id="progress-{{ event.id }}"></div>
+        </div>
+        <p id="countdown-{{ event.id }}"></p>
+        <button onclick="deleteEvent({{ event.id }})">Delete</button>
+    </div>
+</div>
+{% endcomment %}
